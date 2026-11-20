@@ -1,5 +1,11 @@
 # Changelog
 
+## BUH milestone 2
+
+- Screen repair candidates for new boundaries, topology defects, surface and silhouette drift, UV damage, and material changes. Restore the previous Blender mesh datablock after rejection or cancellation.
+- Report candidate measurements, policy thresholds, rollback outcomes, and whether human review is needed. Add an opt-in trial that triangulates bent quads.
+- Add a file-to-file processing command and optional project-scoped Unreal MCP validation for GLB and FBX.
+
 ## BUH development build based on 0.9.9
 
 - The repair CLI accepts exact `.blend` object names and detects a single `_Retopo` result. Multi-mesh imports used for retopology keep the upstream join behavior. Post-join cleanup no longer dereferences the meshes consumed by Blender's join operator.

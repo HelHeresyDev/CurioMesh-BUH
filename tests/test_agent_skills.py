@@ -4,6 +4,7 @@
 import json
 import os
 import re
+import struct
 import subprocess
 import sys
 import tempfile
@@ -20,6 +21,7 @@ sys.path.insert(0, str(ROOT / "skills" / "curiomesh-agent" / "scripts"))
 
 import cm_agent as cm  # noqa: E402
 import curiomesh_fix as fx  # noqa: E402
+import curiomesh_process as process  # noqa: E402
 import curiomesh_mcp as mcp  # noqa: E402
 from scripts.build_release import build_skills  # noqa: E402
 
@@ -83,6 +85,8 @@ class AgentSkillsTest(unittest.TestCase):
                 names = archive.namelist()
         self.assertIn("curiomesh-retopo/SKILL.md", names)
         self.assertIn("curiomesh-retopo/scripts/curiomesh_run.py", names)
+        self.assertIn("curiomesh-retopo/scripts/curiomesh_process.py", names)
+        self.assertIn("curiomesh-retopo/scripts/cm_quality.py", names)
         self.assertIn("curiomesh-agent/SKILL.md", names)
         self.assertIn("curiomesh-agent/scripts/curiomesh_mcp.py", names)
         self.assertFalse([n for n in names if "__pycache__" in n])
@@ -93,6 +97,30 @@ class AgentSkillsTest(unittest.TestCase):
         self.assertNotIn("4 rounds", fix)
         self.assertNotIn("at most three retries", retopo)
         self.assertIn("a round gains nothing", fix)
+
+    def test_glb_validation_and_invalid_buffer(self):
+        with tempfile.TemporaryDirectory() as scratch:
+            path = Path(scratch) / "example.glb"
+            document = {"asset": {"version": "2.0"}, "buffers": [{"byteLength": 40}],
+                        "bufferViews": [{"buffer": 0, "byteLength": 36},
+                                        {"buffer": 0, "byteOffset": 36, "byteLength": 4}],
+                        "accessors": [{"bufferView": 0, "count": 3}],
+                        "meshes": [{"primitives": [{"attributes": {"POSITION": 0}}]}],
+                        "images": [{"bufferView": 1, "mimeType": "image/png"}]}
+
+            def write():
+                manifest = json.dumps(document).encode()
+                manifest += b" " * (-len(manifest) % 4)
+                chunks = struct.pack("<I4s", len(manifest), b"JSON") + manifest
+                chunks += struct.pack("<I4s", 40, b"BIN\0") + bytes(40)
+                path.write_bytes(struct.pack("<4sII", b"glTF", 2, 12 + len(chunks)) + chunks)
+
+            write()
+            self.assertEqual(process.glb_summary(path)["triangles"], 1)
+            document["bufferViews"][1]["byteLength"] = 8
+            write()
+            with self.assertRaisesRegex(ValueError, "buffer view"):
+                process.glb_summary(path)
 
     def test_blender_mcp_skill_uses_agentcmd(self):
         text = (ROOT / "skills" / "curiomesh-blender-mcp" / "SKILL.md").read_text(encoding="utf-8")

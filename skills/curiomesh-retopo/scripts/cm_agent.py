@@ -15,7 +15,7 @@ from pathlib import Path
 
 USES = ("AUTO", "LOW_POLY", "GAME", "ANIMATION", "SUBDIV", "SCAN", "SCULPT")
 ALIASES = {"LOWPOLY": "LOW_POLY", "LOW": "LOW_POLY", "SUBDIVISION": "SUBDIV", "SCANCLEANUP": "SCAN", "SCAN_CLEANUP": "SCAN", "GAMEASSET": "GAME", "GAME_ASSET": "GAME", "ANIM": "ANIMATION", "SCULPT_BASE": "SCULPT"}
-FIXES = ("CLEAN", "FLIP", "UNTANGLE", "RELAX", "PATCH", "ALL")
+FIXES = ("CLEAN", "FLIP", "UNTANGLE", "RELAX", "PATCH", "ALL", "TRIANGULATE_BENT")
 FIX_ALIASES = {"CLEAN_UP": "CLEAN", "CLEANUP": "CLEAN", "FLIP_INWARD": "FLIP", "FIX_ALL": "ALL"}
 DEFECT_KINDS = ("inward", "sunk", "crossing", "folded_over", "bent", "flat", "duplicate", "overlap")
 

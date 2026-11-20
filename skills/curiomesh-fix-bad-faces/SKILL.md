@@ -36,12 +36,12 @@ For `.blend` files, the repair helper selects a single `_Retopo` mesh when prese
    ... curiomesh_fix.py -- RESULT.obj --original ORIGINAL.obj --fix FLIP,UNTANGLE --out fixed1.obj --report m1.json
    ```
    To touch only some faces: `--faces 12,40-55` (numbers from `bad_face_ids`).
-4. Read `m1.json`: `before`, `after`, `steps` (each with `kept`, `bad_before`, `bad_after`). The script keeps a step only when it lowers `bad`, so `after.bad` is never above `before.bad`.
+4. Read `m1.json` for `before`, `after`, `steps`, and `quality_verdict`. A repair needs fewer defects and must pass the geometry checks. Review each step's `reasons`, `warnings`, `measurements`, and `rollback_succeeded`. Use `--quality-policy PATH.json` to set documented threshold overrides.
 5. Loop: take `fixed1.obj` as the new RESULT and go to step 3 with a different fix list (for example what is left: if folds remain, `UNTANGLE,PATCH`). Stop when:
    - `after.bad` is 0, or
    - a round does not lower `bad` (`improved` is false).
 
-   There is no round cap: keep going while the bad-face count drops, and stop when a round gains nothing. (`curiomesh_fix.py` does this itself with a `--fix` list: it runs the list again after every round that gained something, and the report shows `rounds`.)
+   The script stops when a round gains nothing. With `--faces`, it stops after its first accepted change so face indices can be measured again. `TRIANGULATE_BENT` can be tried explicitly on remaining bent quads. Check the tradeoff in the resulting report before retaining it.
 6. Keep the best file. Never overwrite the original or the last good result; write each round to a new file and compare `after.bad`.
 
 ## When fixes do not help

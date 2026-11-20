@@ -51,6 +51,8 @@ Detail is the percent of the view that may differ from the original: lower keeps
 
 ## 5. Read the report
 
+For the BUH pipeline, invoke `python <this skill>/scripts/curiomesh_process.py IN.glb --preset balanced --addon PATH --out OUT.glb --report REPORT.json`. It creates a temporary Blender profile, screens repairs, validates the GLB, and reports `human_review`. Unreal validation is optional through the project's local MCP helper and CurioMesh validation toolset.
+
 Keys: `faces`, `quads`, `tris`, `quad_pct`, `source_faces`, `view_changed_pct`, `seconds`, `parts`, `issues` (`totals` per kind, `spots`, `per_part`, `worst`), `verdict` (`ok` and `problems`).
 
 What is good (from the README's examples, Game Asset at Detail 6):

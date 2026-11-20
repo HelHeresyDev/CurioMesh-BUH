@@ -4,6 +4,8 @@ CurioMesh-BUH is the Beneath Uncounted Heavens fork of [CurioMesh 0.9.9](https:/
 
 Use an isolated Blender profile for the development ZIP. The fork retains the `curiomesh` add-on ID and operator names so existing automation can call it. [Build and testing instructions](DEVELOPMENT.md) · [Baseline and repair results](TEST_RESULTS.md)
 
+The repair CLI screens geometry and rolls back rejected candidates. The `curiomesh_process.py` wrapper runs retopology, repair, and GLB validation for Qwen and can optionally import the result through an isolated Unreal 5.8.4 MCP session.
+
 ## Upstream CurioMesh documentation
 
 **A free, open source Blender retopology add-on. It turns a dense sculpt, scan or high-poly game asset into a clean all-quad, low-poly mesh.**
