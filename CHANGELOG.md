@@ -1,5 +1,11 @@
 # Changelog
 
+## BUH development build based on 0.9.9
+
+- The repair CLI accepts exact `.blend` object names and detects a single `_Retopo` result. Multi-mesh imports used for retopology keep the upstream join behavior. Post-join cleanup no longer dereferences the meshes consumed by Blender's join operator.
+- Repair reports now give the IDs, world-space centers, and kinds of unresolved faces.
+- The development package adds a Blender 5.3 extension archive and identifies itself as CurioMesh-BUH. The package ID, native loader, and solver remain compatible with upstream 0.9.9.
+
 ## 0.9.9 - 2026-11-11
 
 New UVs and Seam Fit, a calmer panel with a "?" on every step, CurioMesh in four more languages, a Help Make It Better

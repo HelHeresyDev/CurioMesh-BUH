@@ -9,6 +9,7 @@ from __future__ import annotations
 import importlib
 import json
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -160,14 +161,29 @@ def _call(new: str, old: str, path: str, **kw):
     op(filepath=path, **kw)
 
 
-def _blend(path):
+def _blend(path, *, object_name=None, prefer_retopo=False):
     import bpy
 
     with bpy.data.libraries.load(path, link=False) as (src, dst):
-        dst.objects = list(src.objects)
-    for obj in dst.objects:
-        if obj is not None and obj.type == "MESH":
-            bpy.context.scene.collection.objects.link(obj)
+        names = list(src.objects)
+        if object_name is not None:
+            if object_name not in names:
+                raise ValueError(f"Object {object_name!r} was not found in {path}")
+            names = [object_name]
+        elif prefer_retopo:
+            results = [name for name in names if re.search(r"_Retopo(?:\.[0-9]+)?$", name)]
+            if results:
+                names = results
+        dst.objects = list(names)
+
+    meshes = [(name, obj) for name, obj in zip(names, dst.objects) if obj is not None and obj.type == "MESH"]
+    if object_name is not None and not meshes:
+        raise ValueError(f"Object {object_name!r} in {path} is not a mesh")
+    if prefer_retopo and len(meshes) > 1:
+        choices = ", ".join(repr(name) for name, _ in meshes)
+        raise ValueError(f"Multiple result meshes in {path}: {choices}. Choose one with --object.")
+    for _, obj in meshes:
+        bpy.context.scene.collection.objects.link(obj)
 
 
 def _npz(path):
@@ -195,36 +211,46 @@ IMPORTERS = {
 }
 
 
-def load_mesh(path: str, name: str):
-    """Import a file and return ONE mesh object called `name` (all meshes in the file joined, transforms baked in)."""
+def load_mesh(path: str, name: str, *, object_name: str | None = None, prefer_retopo: bool = False):
+    """Import a mesh in world coordinates. Join imports unless a .blend result was requested."""
     import bpy
+    from mathutils import Matrix
 
     ext = Path(path).suffix.lower()
     if ext not in IMPORTERS:
         raise ValueError(f"unsupported input {ext}; use one of {', '.join(sorted(IMPORTERS))}")
+    if object_name is not None and ext != ".blend":
+        raise ValueError("Object selection is supported only for .blend input")
     before = set(bpy.context.scene.objects)
-    IMPORTERS[ext](os.path.abspath(path))
+    path = os.path.abspath(path)
+    if ext == ".blend":
+        _blend(path, object_name=object_name, prefer_retopo=prefer_retopo)
+    else:
+        IMPORTERS[ext](path)
     new = [o for o in bpy.context.scene.objects if o not in before]
     meshes = [o for o in new if o.type == "MESH"]
     if not meshes:
         raise RuntimeError(f"no mesh found in {path}")
-    for obj in meshes:
+    bpy.context.view_layer.update()
+    transforms = [obj.matrix_world.copy() for obj in meshes]
+    for obj, world in zip(meshes, transforms):
         for mod in list(obj.modifiers):  # a joined static mesh: drop rigs and everything else that would move it
             obj.modifiers.remove(mod)
-        world = obj.matrix_world.copy()
         obj.parent = None
         if obj.data.users > 1:
             obj.data = obj.data.copy()
         obj.data.transform(world)
-        obj.matrix_world.identity()
-    for obj in bpy.context.scene.objects:
+        obj.matrix_world = Matrix.Identity(4)
+    for other in new:
+        if other.type != "MESH":
+            bpy.data.objects.remove(other, do_unlink=True)
+    for obj in bpy.context.view_layer.objects:
         obj.select_set(obj in meshes)
     bpy.context.view_layer.objects.active = meshes[0]
     if len(meshes) > 1:
-        bpy.ops.object.join()
+        if bpy.ops.object.join() != {'FINISHED'}:
+            raise RuntimeError(f"Could not join meshes from {path}")
     obj = bpy.context.view_layer.objects.active
-    for other in [o for o in new if o is not obj and o.name in bpy.data.objects]:
-        bpy.data.objects.remove(other, do_unlink=True)  # empties and cameras that came with the file
     obj.name = name
     obj.data.name = name
     return obj

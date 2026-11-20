@@ -1,4 +1,10 @@
-# CurioMesh: free automatic retopology add-on for Blender
+# CurioMesh-BUH
+
+CurioMesh-BUH is the Beneath Uncounted Heavens fork of [CurioMesh 0.9.9](https://github.com/CurioCrafter/CurioMesh/releases/tag/v0.9.9) by Andrew Rainsberger and the CurioMesh contributors. It uses the upstream retopology engine and adds safer file-to-file automation for Qwen and OpenCode. This development build was tested on Blender 5.3.0 on Linux x86-64. The project retains upstream's GPL-3.0-or-later [license](LICENSE) and [third-party notices](THIRD_PARTY_NOTICES.md).
+
+Use an isolated Blender profile for the development ZIP. The fork retains the `curiomesh` add-on ID and operator names so existing automation can call it. [Build and testing instructions](DEVELOPMENT.md) · [Baseline and repair results](TEST_RESULTS.md)
+
+## Upstream CurioMesh documentation
 
 **A free, open source Blender retopology add-on. It turns a dense sculpt, scan or high-poly game asset into a clean all-quad, low-poly mesh.**
 

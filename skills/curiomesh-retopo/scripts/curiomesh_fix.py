@@ -31,6 +31,11 @@ def count_bad(obj, fix_select, context, limit=2000):
     out["bad"] = int(bad.sum())
     out["faces"] = len(area)
     out["bad_face_ids"] = [int(i) for i in bad.nonzero()[0][:limit]]
+    out["bad_faces"] = [
+        {"face_id": i, "center_world": list(obj.matrix_world @ area[i].calc_center_median()),
+         "kinds": [kind for kind in cm.DEFECT_KINDS if getattr(found, kind)[i]]}
+        for i in out["bad_face_ids"]
+    ]
     bm.free()
     return out
 
@@ -82,7 +87,9 @@ def fix_rounds(fixes, first, do_step):
 def main() -> int:
     ap = argparse.ArgumentParser(prog="curiomesh_fix.py")
     ap.add_argument("input")
+    ap.add_argument("--object", help="Exact result object name in a .blend file")
     ap.add_argument("--original", default=None)
+    ap.add_argument("--original-object", help="Exact source object name in the --original .blend file")
     ap.add_argument("--fix", default=None)
     ap.add_argument("--faces", default=None)
     ap.add_argument("--grow", type=int, default=None)
@@ -90,6 +97,8 @@ def main() -> int:
     ap.add_argument("--report", default=None)
     ap.add_argument("--addon", default=None)
     args = ap.parse_args(cm.script_args())
+    if args.original_object and not args.original:
+        raise ValueError("--original-object requires --original")
     fixes = cm.parse_fixes(args.fix) if args.fix else []
     ids = cm.parse_faces(args.faces) if args.faces else []
 
@@ -98,9 +107,9 @@ def main() -> int:
     package = cm.load_addon(args.addon)
     fix_select = cm.sub(package, "fix_select")
     ctx = bpy.context
-    obj = cm.load_mesh(args.input, "Result")
+    obj = cm.load_mesh(args.input, "Result", object_name=args.object, prefer_retopo=True)
     if args.original:
-        original = cm.load_mesh(args.original, "Original")
+        original = cm.load_mesh(args.original, "Original", object_name=args.original_object)
         original.hide_set(True)
         ctx.scene.curiomesh_fix.source = original
     ctx.scene.curiomesh_fix.grow = args.grow if args.grow is not None else (0 if ids else 1)
@@ -135,9 +144,10 @@ def main() -> int:
         "input": args.input,
         "original": args.original,
         "had_original": bool(args.original),
-        "before": {k: v for k, v in first.items() if k != "bad_face_ids"},
-        "after": {k: v for k, v in current.items() if k != "bad_face_ids"},
+        "before": {k: v for k, v in first.items() if k not in {"bad_face_ids", "bad_faces"}},
+        "after": {k: v for k, v in current.items() if k not in {"bad_face_ids", "bad_faces"}},
         "bad_face_ids": current["bad_face_ids"],
+        "bad_faces": current["bad_faces"],
         "steps": steps,
         "rounds": rounds,
         "improved": cm.better(first, current),

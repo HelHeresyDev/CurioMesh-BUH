@@ -79,12 +79,12 @@ class ReleasePackageTests(unittest.TestCase):
         package_id, version = release_metadata(ROOT)
         with tempfile.TemporaryDirectory() as temporary:
             built = {p.name: p for p in build_per_version(ROOT, Path(temporary))}
-            self.assertEqual(len(built), 10)
+            self.assertEqual(len(built), 11)
             for series in ("3.6", "4.0", "4.1"):
                 with zipfile.ZipFile(built[f"{package_id}-{version}-blender-{series}-addon.zip"]) as z:
                     info = z.read("curiomesh/__init__.py").decode()
                 self.assertIn(f'"blender": ({series.replace(".", ", ")}, 0)', info)
-            series_list = ["4.2", "4.3", "4.4", "4.5", "5.0", "5.1", "5.2"]
+            series_list = ["4.2", "4.3", "4.4", "4.5", "5.0", "5.1", "5.2", "5.3"]
             for i, series in enumerate(series_list):
                 with zipfile.ZipFile(built[f"{package_id}-{version}-blender-{series}-extension.zip"]) as z:
                     manifest = tomllib.loads(z.read("blender_manifest.toml").decode())

@@ -20,6 +20,8 @@ ROOT_FILES = {
     "LICENSE",
     "README.md",
     "CHANGELOG.md",
+    "DEVELOPMENT.md",
+    "TEST_RESULTS.md",
     "THIRD_PARTY_NOTICES.md",
 }
 
@@ -131,7 +133,7 @@ def native_files(native_dir: Path | None) -> list[tuple[Path, str]]:
 
 
 LEGACY_SERIES = ("3.6", "4.0", "4.1")
-EXTENSION_SERIES = ("4.2", "4.3", "4.4", "4.5", "5.0", "5.1", "5.2")
+EXTENSION_SERIES = ("4.2", "4.3", "4.4", "4.5", "5.0", "5.1", "5.2", "5.3")
 
 
 def per_version_name(package_id: str, version: str, series: str, layout: str) -> str:

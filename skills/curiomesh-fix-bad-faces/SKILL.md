@@ -23,11 +23,13 @@ Uses `curiomesh_fix.py` and `curiomesh_run.py` from the sibling skill `curiomesh
 
 Use `.obj` or `.blend` for the result you fix (retopo with `--out result.obj`). A `.glb` stores triangles only, so every quad comes back as two triangles and the counts no longer match the retopo report.
 
+For `.blend` files, the repair helper selects a single `_Retopo` mesh when present. Pass `--object "Exact result name"` if the file has multiple candidate meshes. Use `--original FILE.blend --original-object "Exact source name"` to measure against a specific source mesh, which may be in the same file. The input file is read without saving changes back to it. Write each trial to a new output file.
+
 1. Measure only (no `--fix`). The original is needed so "inward" is known:
    ```
    "$BLENDER" -b --factory-startup --python <retopo skill>/scripts/curiomesh_fix.py -- RESULT.obj --original ORIGINAL.obj --report m0.json
    ```
-   `before.bad` is the count of bad faces, `before` has the count per kind, `bad_face_ids` lists them (capped at 2000).
+   `before.bad` is the count of bad faces, and `before` has the count per kind. `bad_face_ids` lists the remaining faces and `bad_faces` gives their centers in world coordinates and their defect kinds (both lists capped at 2000). The IDs refer to the repaired mesh before export triangulates it.
 2. If `before.bad` is 0, stop: nothing to fix.
 3. Fix. Start with `--fix ALL` (Clean Up, Flip Inward, Untangle, Relax, Patch in turn; a move that makes it worse is undone). For one kind, name the fix from the table:
    ```
