@@ -1,0 +1,5 @@
+[
+  {"name": "solid container", "start_cm": [0, -150, -20], "end_cm": [0, 150, -20], "blocked": true},
+  {"name": "above the lid", "start_cm": [0, -150, 105], "end_cm": [0, 150, 105], "blocked": false},
+  {"name": "pawn capsule at chest", "start_cm": [0, -170, -15], "end_cm": [0, 170, -15], "blocked": true, "radius_cm": 24, "half_height_cm": 42}
+]

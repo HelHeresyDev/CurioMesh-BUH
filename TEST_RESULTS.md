@@ -75,4 +75,39 @@ CurioMesh exported three GLBs from the repaired lantern GLB using `--lods 100,50
 
 The separate Unreal-generated FBX variant had **11,612, 5,806, and 2,902** render triangles at its three LODs. At approximately 3.5, 5.8, and 8.4 m, the forced LOD renders retained a recognizable silhouette. LOD1 and LOD2 had no UV channels reported by the editor query. The shared GLB material was assigned in metadata, but these captures stayed gray, so the variant did not pass visual texture verification. [Unreal LOD captures](docs/evidence/milestone-2-unreal-lods.png)
 
-Investigate a textured custom LOD chain using the accepted GLB as LOD0 and verify game collision separately. Keep the unresolved Balanced defect and High Fidelity boundary rejection as regression cases.
+## Milestone 3 static asset validation
+
+Tests ran on Linux x86-64 with Blender 5.3.0 build `02f0899d78e3` and Unreal 5.8.4 build `58902052`. Blender used a temporary profile and CPU processing. Unreal imports and query tests used isolated test maps, with graphical Vulkan PIE used for the rendered captures. [Replay commands](DEVELOPMENT.md#static-props-from-blender-to-unreal) · [Measured results and query outcomes](docs/evidence/milestone-3-results.json)
+
+### Painted lantern and normal LOD switching
+
+Reopening the same saved Milestone 2 FBX-derived mesh yielded brown paint at all three levels. Geometry Script found two UV channels in its render data. The earlier editor UV count inspected source mesh descriptions, which are absent for those generated lower levels. This rules out missing render UVs as the explanation for the gray captures. The gray state cleared on reopening, but the trigger for that state was not reproduced. [Reopened FBX-derived mesh and direct GLB render comparison](docs/evidence/milestone-3-gray-retest.png)
+
+The current path imports the accepted painted GLB, disables Nanite for conventional LODs, and reduces LOD1 and LOD2 on the same Static Mesh. LOD0's source and render geometry, UVs and normals remained identical. The three levels carry one render UV channel and the same material slot, with the imported Base Color in sRGB and Metallic/Roughness in linear space. LOD1 and LOD2 measured 0.089 cm and 0.233 cm RMS surface deviation from LOD0. The brown paint, roof silhouette and window were visible in the forced renders. At camera distance scales 0.9, 1.9 and 4.2, the automatic render matched forced LOD0, LOD1 and LOD2 respectively, pixel for pixel in all three camera angles. [Graphical PIE captures](docs/evidence/milestone-3-lantern-distance.jpg)
+
+### Reference asset results
+
+All three painted GLBs started at 40,000 triangles. Each retained both embedded texture payloads after Blender processing. The surface values are sampled 95th-percentile distances in Blender units and the silhouette differences are sampled against the input. Defects, boundaries, and components are measured on the optimized Blender meshes before GLB triangulation.
+
+| Category and preset | Unreal LOD0 / LOD1 / LOD2 triangles | Surface p95 | Silhouette mismatch | Bad faces / collapsed UV polygons | Open / non-manifold edges | Components | Blender processing |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Architecture, lantern Balanced | 11,612 / 5,806 / 2,902 | 0.002426 | 0.226% | 1 / 1 | 18 / 0 | 5 | Repair fixture replayed from the accepted draft |
+| Organic, stump Balanced | 36,090 / 18,044 / 9,022 | 0.001373 | 0.275% | 0 / 0 | 20 / 0 | 4 | 21.16 s |
+| Hard surface, chest Balanced | 7,744 / 3,872 / 1,936 | 0.002913 | 0.251% | 2 / 7 | 48 / 0 | 9 | 17.13 s |
+| Hard surface, chest High Fidelity | 24,306 / 12,152 / 6,076 | 0.001135 | 0.090% | 0 / 1 | 48 / 0 | 9 | 19.50 s |
+
+The stump and chest shapes, recognizable paint, and material bindings were inspected on all forced LODs in graphical PIE. The chest appears darker under the preview's directional lighting, with its wood panels and painted accents visible. Balanced is the cleanest stump tested. Aggressive cut the stump to 19,354 triangles in 16.72 s and left three bad faces and one collapsed UV polygon. Balanced is the lighter chest candidate. High Fidelity trades a roughly threefold LOD0 increase for fewer defects and still needs UV review. The CLI end-to-end stump run, including headless PIE probes, took 24.05 s and reported `REVIEW` for the rendered appearance check. [Blender and graphical Unreal PIE captures](docs/evidence/milestone-3-reference-models.jpg)
+
+### Gameplay collision and rejection tests
+
+The lantern's 16-hull decomposition passed the solid-base and window tests, but filled the small base arch. With explicit `complex` collision, the LOD0 triangle mesh blocked the solid base and a capsule with a 24 cm radius and 42 cm half height. The window and arch cleared the line tests and their smaller capsules. All four results held at each forced render LOD in graphical and headless PIE. This is a static triangle collision choice and uses 11,612 triangles for the shape. The clearance checks cover the tested directions and sizes.
+
+The stump used five engine-generated hulls of 14–24 vertices each. Each chest used one 24-vertex hull. Solid, above-object and pawn-size probes passed at all forced LODs in PIE. A decorative chest had no shapes and did not block any PIE probe. A primitive box passed the chest's editor probes. A single planar triangle fixture produced zero convex hulls and correctly failed collision generation.
+
+An excessively reduced chest produced 64 triangles at both lower levels. The LOD gate rejected the chain, saved LOD0 alone, and reopening confirmed its 7,744 triangles. Reusing a build run ID was rejected. The CLI returned `REVIEW` when the Unreal endpoint was unavailable, preserving the local GLB. Import-error classification was exercised with a test toolset. The Python suite ran 837 tests with 108 skips, and the Blender repair regression passed.
+
+### Retained repair warnings
+
+The Balanced lantern again reduced five folded faces to one bent quad and kept all 18 open edges. The remaining face `3982` covers about 0.08 cm² and its two triangulated normals differ by 172°. Collapsed UV polygon `33` lies at a separate location and covers about 20 cm². The whole-object rendered comparisons showed no obvious macro-scale effect. Both warnings remain in the report. The asset imported, reduced, rendered and passed its collision probes with those warnings present. High Fidelity again rejected the unsafe patch that would have added four open edges, retaining its 12 folded faces and original boundary.
+
+The next production check is to set budgets for repeated props and test repeatability across several independently generated examples per category. Prioritize targeted UV repairs for painted hero props and a lower-cost collision shape for frequently instanced architectural assets with openings.

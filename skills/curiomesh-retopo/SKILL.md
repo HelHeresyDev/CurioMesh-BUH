@@ -15,7 +15,7 @@ Use the first that exists, and say which you used:
 2. `blender` on PATH.
 3. Windows: `C:\Program Files\Blender Foundation\Blender *\blender.exe` (newest). macOS: `/Applications/Blender.app/Contents/MacOS/Blender`. Linux: `/usr/bin/blender`, `/snap/bin/blender`, `~/blender*/blender`.
 
-CurioMesh needs Blender 3.6 to 5.2. If none is found, ask the user for the path. Do not download Blender yourself.
+Upstream CurioMesh supports Blender 3.6 to 5.2. The BUH development package was tested with Blender 5.3.0. Use its isolated profile or pass the extracted add-on folder.
 
 ## 2. Find CurioMesh
 
@@ -51,7 +51,11 @@ Detail is the percent of the view that may differ from the original: lower keeps
 
 ## 5. Read the report
 
-For the BUH pipeline, invoke `python <this skill>/scripts/curiomesh_process.py IN.glb --preset balanced --addon PATH --out OUT.glb --report REPORT.json`. It creates a temporary Blender profile, screens repairs, validates the GLB, and reports `human_review`. Unreal validation is optional through the project's local MCP helper and CurioMesh validation toolset.
+For the BUH pipeline, invoke `python <this skill>/scripts/curiomesh_process.py IN.glb --preset balanced --addon PATH --out OUT.glb --report REPORT.json`. It creates a temporary Blender profile, screens repairs, and validates the GLB. Read `disposition`, `disposition_reasons`, and `human_review` before moving an asset into production. Use new output and report paths on retries.
+
+For an Unreal 5.8.4 prop, add `--asset-category architecture|organic|hard_surface|decorative`, choosing one value, and `--lods --lod-ratios 0.5,0.25`. Pass the local `--unreal-mcp-helper` and a unique `--unreal-run-id`. The editor needs the fork's validation toolset loaded and `CURIOMESH_VALIDATION_EXPORTS` set to the directory containing `OUT.glb`. Add `--collision auto|none|simple|convex|complex`, choosing one mode, and `--collision-probes PROBES.json --unreal-pie` for gameplay queries. Use explicit `complex` only for stationary shapes that need concave collision, and verify the openings with probes. `--preset auto` uses Balanced and flags an unspecified category for review.
+
+Unreal is reported as untested when skipped and unavailable when the validation editor cannot be reached. Inspect textured LOD captures for silhouette and material appearance before clearing `lod_visual_validation_pending`. [Project setup and replay instructions](https://github.com/HelHeresyDev/CurioMesh-BUH/blob/buh/blender-5.3/DEVELOPMENT.md#static-props-from-blender-to-unreal)
 
 Keys: `faces`, `quads`, `tris`, `quad_pct`, `source_faces`, `view_changed_pct`, `seconds`, `parts`, `issues` (`totals` per kind, `spots`, `per_part`, `worst`), `verdict` (`ok` and `problems`).
 

@@ -4,7 +4,7 @@ CurioMesh-BUH is the Beneath Uncounted Heavens fork of [CurioMesh 0.9.9](https:/
 
 Use an isolated Blender profile for the development ZIP. The fork retains the `curiomesh` add-on ID and operator names so existing automation can call it. [Build and testing instructions](DEVELOPMENT.md) · [Baseline and repair results](TEST_RESULTS.md)
 
-The repair CLI screens geometry and rolls back rejected candidates. The `curiomesh_process.py` wrapper runs retopology, repair, and GLB validation for Qwen and can optionally import the result through an isolated Unreal 5.8.4 MCP session.
+The `curiomesh_process.py` wrapper runs retopology, screened repairs, and textured GLB validation in an isolated Blender profile. Its optional Unreal 5.8.4 stage builds a conventional LOD chain on a single Static Mesh, generates collision, and checks line and capsule queries in PIE. The source mesh stays intact, and reports identify the checks that still require review. [CLI usage and Unreal setup](DEVELOPMENT.md#static-props-from-blender-to-unreal) · [Lantern, stump, and chest results](TEST_RESULTS.md#milestone-3-static-asset-validation)
 
 ## Upstream CurioMesh documentation
 

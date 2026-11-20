@@ -1,0 +1,5 @@
+[
+  {"name": "solid trunk", "start_cm": [0, -150, 0], "end_cm": [0, 150, 0], "blocked": true},
+  {"name": "above trunk", "start_cm": [0, -150, 110], "end_cm": [0, 150, 110], "blocked": false},
+  {"name": "pawn capsule at trunk", "start_cm": [0, -170, -7], "end_cm": [0, 170, -7], "blocked": true, "radius_cm": 24, "half_height_cm": 42}
+]

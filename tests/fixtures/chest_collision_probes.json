@@ -1,0 +1,4 @@
+[
+  {"name": "solid chest", "start_cm": [0, -130, -10], "end_cm": [0, 130, -10], "blocked": true},
+  {"name": "above chest", "start_cm": [0, -130, 70], "end_cm": [0, 130, 70], "blocked": false}
+]

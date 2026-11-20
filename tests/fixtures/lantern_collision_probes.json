@@ -1,0 +1,6 @@
+[
+  {"name": "solid base", "start_cm": [0, -140, -60], "end_cm": [0, 140, -60], "blocked": true},
+  {"name": "lantern window", "start_cm": [0, -140, -20], "end_cm": [0, 140, -20], "blocked": false},
+  {"name": "base arch", "start_cm": [0, -140, -80], "end_cm": [0, 140, -80], "blocked": false, "radius_cm": 1, "half_height_cm": 2},
+  {"name": "pawn capsule at base", "start_cm": [0, -160, -55], "end_cm": [0, 160, -55], "blocked": true, "radius_cm": 24, "half_height_cm": 42}
+]

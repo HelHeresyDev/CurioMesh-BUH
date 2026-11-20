@@ -1,5 +1,12 @@
 # Changelog
 
+## BUH milestone 3
+
+- Generate two conventional Unreal LODs directly from the repaired, textured GLB. Validate render UVs, normals, material slots, triangle ordering and surface deviation. Roll back failed reductions to LOD0.
+- Add category-aware convex collision, simple box and static triangle collision, and an explicit no-collision option. Check solids and required clearances with lines and capsule sweeps in Unreal PIE.
+- Report `PASS`, `REVIEW` or `FAIL` for the file-to-file workflow, including untested and unavailable Unreal stages. Verify the exported file's identity before building the Unreal LOD and collision asset.
+- Record graphical PIE LOD selection for the painted lantern and multi-asset tests for a painted tree stump and chest.
+
 ## BUH milestone 2
 
 - Screen repair candidates for new boundaries, topology defects, surface and silhouette drift, UV damage, and material changes. Restore the previous Blender mesh datablock after rejection or cancellation.

@@ -1,0 +1,1562 @@
+{
+  "blender_version": "5.3.0 (02f0899d78e3)",
+  "unreal_version": "5.8.4-58902052+++UE5+Release-5.8",
+  "lantern": {
+    "source_triangles": 40000,
+    "before_repair": {
+      "triangulated_faces": 11618,
+      "surface_p95": 0.0024264562991447745,
+      "surface_max": 0.024954883381724358,
+      "silhouette_miss_pct": 0.22563813284445072,
+      "bad": 5,
+      "folded_over": 5,
+      "bent": 0,
+      "open_edges": 18,
+      "non_manifold_edges": 0,
+      "components": 5,
+      "invalid_uv_corners": 0,
+      "collapsed_uv_faces": 1
+    },
+    "after_repair": {
+      "triangulated_faces": 11612,
+      "surface_p95": 0.0024264562991447745,
+      "surface_max": 0.024954883381724358,
+      "silhouette_miss_pct": 0.22563813284445072,
+      "bad": 1,
+      "folded_over": 0,
+      "bent": 1,
+      "open_edges": 18,
+      "non_manifold_edges": 0,
+      "components": 5,
+      "invalid_uv_corners": 0,
+      "collapsed_uv_faces": 1
+    },
+    "accepted_blender_residuals": {
+      "bent": {
+        "id": 3982,
+        "center": [
+          0.3777904808521271,
+          0.46961069107055664,
+          0.26721441745758057
+        ],
+        "area_m2": 8.04824048827868e-06,
+        "alternating_triangle_normal_angle_deg": 171.898307823054,
+        "vertex_positions": [
+          [
+            0.3764190077781677,
+            0.4627484977245331,
+            0.266246497631073
+          ],
+          [
+            0.3797972500324249,
+            0.4692094922065735,
+            0.2671405076980591
+          ],
+          [
+            0.37456199526786804,
+            0.47167301177978516,
+            0.2673274874687195
+          ],
+          [
+            0.38038361072540283,
+            0.47481176257133484,
+            0.2681432366371155
+          ]
+        ]
+      },
+      "collapsed_uv_polygons": [
+        {
+          "id": 33,
+          "center": [
+            0.26862770318984985,
+            -0.3636810779571533,
+            0.07495833188295364
+          ],
+          "area_m2": 0.001973123289644718,
+          "signed_uv_double_area": 0.0
+        }
+      ],
+      "quads": 5806
+    },
+    "unreal": {
+      "asset": "/Game/Developer/CurioMeshBUHTests/M3ReadyLantern/GLB/balanced/StaticMeshes/balanced.balanced",
+      "lods": {
+        "status": "pass",
+        "reasons": [],
+        "ratios": [
+          0.5,
+          0.25
+        ],
+        "lod0_source_identical": true,
+        "lod0_render_identical": true,
+        "levels": [
+          {
+            "triangles": 11612,
+            "render_uv_channels": 1,
+            "has_render_normals": true,
+            "uv_abs_area": 0.5398791805637302,
+            "uv_samples": 512,
+            "invalid_uv_samples": 0,
+            "collapsed_uv_samples": 1,
+            "vertices": 12606,
+            "source_triangles": 11612,
+            "material_slots": [
+              0
+            ],
+            "materials": [
+              "/Game/Developer/CurioMeshBUHTests/M3ReadyLantern/GLB/balanced/Materials/Material_0.Material_0"
+            ]
+          },
+          {
+            "triangles": 5806,
+            "render_uv_channels": 1,
+            "has_render_normals": true,
+            "uv_abs_area": 0.5404107918147929,
+            "uv_samples": 512,
+            "invalid_uv_samples": 0,
+            "collapsed_uv_samples": 1,
+            "vertices": 8241,
+            "source_triangles": null,
+            "material_slots": [
+              0
+            ],
+            "materials": [
+              "/Game/Developer/CurioMeshBUHTests/M3ReadyLantern/GLB/balanced/Materials/Material_0.Material_0"
+            ],
+            "deviation_cm": {
+              "max": 2.1776513583314996,
+              "mean": 0.038491546302002376,
+              "rms": 0.08885542076899623
+            }
+          },
+          {
+            "triangles": 2902,
+            "render_uv_channels": 1,
+            "has_render_normals": true,
+            "uv_abs_area": 0.5422309257264715,
+            "uv_samples": 512,
+            "invalid_uv_samples": 0,
+            "collapsed_uv_samples": 0,
+            "vertices": 4737,
+            "source_triangles": null,
+            "material_slots": [
+              0
+            ],
+            "materials": [
+              "/Game/Developer/CurioMeshBUHTests/M3ReadyLantern/GLB/balanced/Materials/Material_0.Material_0"
+            ],
+            "deviation_cm": {
+              "max": 2.307863973972407,
+              "mean": 0.1482937481838601,
+              "rms": 0.23273127722648548
+            }
+          }
+        ],
+        "screen_sizes": [
+          1.0,
+          0.41999998688697815,
+          0.1899999976158142
+        ],
+        "nanite_enabled": false
+      },
+      "textures": {
+        "BaseColorTexture": {
+          "name": "Image_0",
+          "width": 1024,
+          "height": 1024,
+          "srgb": true
+        },
+        "MetallicRoughnessTexture": {
+          "name": "Image_1",
+          "width": 1024,
+          "height": 1024,
+          "srgb": false
+        }
+      },
+      "collision": {
+        "simple_shapes": 0,
+        "primitive_shapes": 0,
+        "convex_hulls": 0,
+        "hull_vertex_counts": [],
+        "complexity": "<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
+        "collision_lod": 0,
+        "requested": "complex",
+        "mode": "complex",
+        "status": "pass",
+        "warnings": [],
+        "probes": [
+          {
+            "name": "solid base",
+            "start_cm": [
+              0,
+              -140,
+              -60
+            ],
+            "end_cm": [
+              0,
+              140,
+              -60
+            ],
+            "blocked": true,
+            "line_blocked": true,
+            "capsule_blocked_observed": true,
+            "pass": true
+          },
+          {
+            "name": "lantern window",
+            "start_cm": [
+              0,
+              -140,
+              -20
+            ],
+            "end_cm": [
+              0,
+              140,
+              -20
+            ],
+            "blocked": false,
+            "line_blocked": false,
+            "capsule_blocked_observed": false,
+            "pass": true
+          },
+          {
+            "name": "base arch",
+            "start_cm": [
+              0,
+              -140,
+              -80
+            ],
+            "end_cm": [
+              0,
+              140,
+              -80
+            ],
+            "blocked": false,
+            "radius_cm": 1,
+            "half_height_cm": 2,
+            "line_blocked": false,
+            "capsule_blocked_observed": false,
+            "pass": true
+          },
+          {
+            "name": "pawn capsule at base",
+            "start_cm": [
+              0,
+              -160,
+              -55
+            ],
+            "end_cm": [
+              0,
+              160,
+              -55
+            ],
+            "blocked": true,
+            "radius_cm": 24,
+            "half_height_cm": 42,
+            "line_blocked": true,
+            "capsule_blocked_observed": true,
+            "pass": true
+          }
+        ],
+        "forced_lods": {
+          "0": "pass",
+          "1": "pass",
+          "2": "pass"
+        },
+        "world": "pie",
+        "level": "/Game/Developer/CurioMeshBUHTests/M3ReadyLantern/Preview_StaticMeshes"
+      }
+    },
+    "actual_distance_lod_switch": {
+      "status": "pass",
+      "matches": [
+        {
+          "distance_scale": 0.9,
+          "angle": "front",
+          "expected_lod": 0,
+          "exact_matches": [
+            0
+          ],
+          "mean_absolute_pixel_errors": [
+            0.0,
+            0.12820934256055364,
+            0.31139994232987317
+          ],
+          "pass": true
+        },
+        {
+          "distance_scale": 0.9,
+          "angle": "side",
+          "expected_lod": 0,
+          "exact_matches": [
+            0
+          ],
+          "mean_absolute_pixel_errors": [
+            0.0,
+            0.14244881776239907,
+            0.3473399653979239
+          ],
+          "pass": true
+        },
+        {
+          "distance_scale": 0.9,
+          "angle": "three_quarter",
+          "expected_lod": 0,
+          "exact_matches": [
+            0
+          ],
+          "mean_absolute_pixel_errors": [
+            0.0,
+            0.13951268742791234,
+            0.3543685121107267
+          ],
+          "pass": true
+        },
+        {
+          "distance_scale": 1.9,
+          "angle": "front",
+          "expected_lod": 1,
+          "exact_matches": [
+            1
+          ],
+          "mean_absolute_pixel_errors": [
+            0.02633073817762399,
+            0.0,
+            0.05284890426758939
+          ],
+          "pass": true
+        },
+        {
+          "distance_scale": 1.9,
+          "angle": "side",
+          "expected_lod": 1,
+          "exact_matches": [
+            1
+          ],
+          "mean_absolute_pixel_errors": [
+            0.02950836216839677,
+            0.0,
+            0.05896698385236448
+          ],
+          "pass": true
+        },
+        {
+          "distance_scale": 1.9,
+          "angle": "three_quarter",
+          "expected_lod": 1,
+          "exact_matches": [
+            1
+          ],
+          "mean_absolute_pixel_errors": [
+            0.03176975201845444,
+            0.0,
+            0.06898716839677048
+          ],
+          "pass": true
+        },
+        {
+          "distance_scale": 4.2,
+          "angle": "front",
+          "expected_lod": 2,
+          "exact_matches": [
+            2
+          ],
+          "mean_absolute_pixel_errors": [
+            0.016386245674740483,
+            0.014256776239907726,
+            0.0
+          ],
+          "pass": true
+        },
+        {
+          "distance_scale": 4.2,
+          "angle": "side",
+          "expected_lod": 2,
+          "exact_matches": [
+            2
+          ],
+          "mean_absolute_pixel_errors": [
+            0.01958044982698962,
+            0.016800749711649365,
+            0.0
+          ],
+          "pass": true
+        },
+        {
+          "distance_scale": 4.2,
+          "angle": "three_quarter",
+          "expected_lod": 2,
+          "exact_matches": [
+            2
+          ],
+          "mean_absolute_pixel_errors": [
+            0.01873558246828143,
+            0.017448817762399076,
+            0.0
+          ],
+          "pass": true
+        }
+      ]
+    },
+    "convex_probes": {
+      "status": "fail",
+      "probes": [
+        {
+          "name": "solid base",
+          "start_cm": [
+            0,
+            -140,
+            -60
+          ],
+          "end_cm": [
+            0,
+            140,
+            -60
+          ],
+          "blocked": true,
+          "line_blocked": true,
+          "capsule_blocked_observed": true,
+          "pass": true
+        },
+        {
+          "name": "lantern window",
+          "start_cm": [
+            0,
+            -140,
+            -20
+          ],
+          "end_cm": [
+            0,
+            140,
+            -20
+          ],
+          "blocked": false,
+          "line_blocked": false,
+          "capsule_blocked_observed": false,
+          "pass": true
+        },
+        {
+          "name": "base arch",
+          "start_cm": [
+            0,
+            -140,
+            -80
+          ],
+          "end_cm": [
+            0,
+            140,
+            -80
+          ],
+          "blocked": false,
+          "radius_cm": 1,
+          "half_height_cm": 2,
+          "line_blocked": true,
+          "capsule_blocked_observed": true,
+          "pass": false
+        },
+        {
+          "name": "pawn capsule at base",
+          "start_cm": [
+            0,
+            -160,
+            -55
+          ],
+          "end_cm": [
+            0,
+            160,
+            -55
+          ],
+          "blocked": true,
+          "radius_cm": 24,
+          "half_height_cm": 42,
+          "line_blocked": true,
+          "capsule_blocked_observed": true,
+          "pass": true
+        }
+      ],
+      "forced_lods": {
+        "0": "fail",
+        "1": "fail",
+        "2": "fail"
+      },
+      "world": "editor",
+      "level": "/Game/Developer/CurioMeshBUHTests/M3LanternConvex/Preview_StaticMeshes"
+    }
+  },
+  "lantern_high_fidelity_regression": {
+    "before": {
+      "triangulated_faces": 32232,
+      "surface_p95": 0.0010435297328513114,
+      "surface_max": 0.008087731897830963,
+      "silhouette_miss_pct": 0.08459640465280226,
+      "bad": 12,
+      "folded_over": 12,
+      "bent": 0,
+      "open_edges": 18,
+      "non_manifold_edges": 0,
+      "components": 5,
+      "invalid_uv_corners": 0,
+      "collapsed_uv_faces": 0
+    },
+    "after": {
+      "triangulated_faces": 32232,
+      "surface_p95": 0.0010435297328513114,
+      "surface_max": 0.008087731897830963,
+      "silhouette_miss_pct": 0.08459640465280226,
+      "bad": 12,
+      "folded_over": 12,
+      "bent": 0,
+      "open_edges": 18,
+      "non_manifold_edges": 0,
+      "components": 5,
+      "invalid_uv_corners": 0,
+      "collapsed_uv_faces": 0
+    },
+    "rejected_trials": [
+      {
+        "fix": "ALL",
+        "reasons": [
+          "overlap_faces_increased",
+          "new_open_boundary"
+        ],
+        "rollback_succeeded": true
+      }
+    ]
+  },
+  "stump_balanced": {
+    "source_triangles": 40000,
+    "preset": "balanced",
+    "processing_seconds": 21.16,
+    "retopology_seconds": 15.6,
+    "before_repair": {
+      "triangulated_faces": 36090,
+      "surface_p95": 0.001372498134151101,
+      "surface_max": 0.007170919794589281,
+      "silhouette_miss_pct": 0.2750901157275659,
+      "bad": 1,
+      "folded_over": 0,
+      "bent": 1,
+      "open_edges": 20,
+      "non_manifold_edges": 0,
+      "components": 4,
+      "invalid_uv_corners": 0,
+      "collapsed_uv_faces": 0
+    },
+    "after_repair": {
+      "triangulated_faces": 36090,
+      "surface_p95": 0.0013725273543968796,
+      "surface_max": 0.007170919794589281,
+      "silhouette_miss_pct": 0.2750901157275659,
+      "bad": 0,
+      "folded_over": 0,
+      "bent": 0,
+      "open_edges": 20,
+      "non_manifold_edges": 0,
+      "components": 4,
+      "invalid_uv_corners": 0,
+      "collapsed_uv_faces": 0
+    },
+    "export": {
+      "triangles": 36090,
+      "primitives": 1,
+      "primitives_with_uv": 1,
+      "primitives_with_material": 1,
+      "materials": 1,
+      "embedded_images": [
+        {
+          "mime_type": "image/png",
+          "sha256": "b986b4a4522681c458e915360401869370dda68f984ea720abd1cef59f6e51ca"
+        },
+        {
+          "mime_type": "image/png",
+          "sha256": "4145a4416ef7c9b68ee7dcf3f9d4664c23bf8584aa8eaf120ba272d2dce2f250"
+        }
+      ],
+      "warnings": []
+    },
+    "repair_verdict": {
+      "status": "pass",
+      "human_review": false,
+      "warnings": [],
+      "residual_checks": []
+    },
+    "unreal": {
+      "asset": "/Game/Developer/CurioMeshBUHTests/M3ReferenceStump/GLB/ReferenceStump/StaticMeshes/ReferenceStump.ReferenceStump",
+      "lods": {
+        "status": "pass",
+        "reasons": [],
+        "ratios": [
+          0.5,
+          0.25
+        ],
+        "lod0_source_identical": true,
+        "lod0_render_identical": true,
+        "levels": [
+          {
+            "triangles": 36090,
+            "render_uv_channels": 1,
+            "has_render_normals": true,
+            "uv_abs_area": 0.545669246595935,
+            "uv_samples": 512,
+            "invalid_uv_samples": 0,
+            "collapsed_uv_samples": 0,
+            "vertices": 40642,
+            "source_triangles": 36090,
+            "material_slots": [
+              0
+            ],
+            "materials": [
+              "/Game/Developer/CurioMeshBUHTests/M3ReferenceStump/GLB/ReferenceStump/Materials/Material_0.Material_0"
+            ]
+          },
+          {
+            "triangles": 18044,
+            "render_uv_channels": 1,
+            "has_render_normals": true,
+            "uv_abs_area": 0.5451958181656664,
+            "uv_samples": 512,
+            "invalid_uv_samples": 0,
+            "collapsed_uv_samples": 0,
+            "vertices": 26570,
+            "source_triangles": null,
+            "material_slots": [
+              0
+            ],
+            "materials": [
+              "/Game/Developer/CurioMeshBUHTests/M3ReferenceStump/GLB/ReferenceStump/Materials/Material_0.Material_0"
+            ],
+            "deviation_cm": {
+              "max": 0.9858386139905208,
+              "mean": 0.03167009704600179,
+              "rms": 0.06207226159041896
+            }
+          },
+          {
+            "triangles": 9022,
+            "render_uv_channels": 1,
+            "has_render_normals": true,
+            "uv_abs_area": 0.5458118358947104,
+            "uv_samples": 512,
+            "invalid_uv_samples": 0,
+            "collapsed_uv_samples": 0,
+            "vertices": 15818,
+            "source_triangles": null,
+            "material_slots": [
+              0
+            ],
+            "materials": [
+              "/Game/Developer/CurioMeshBUHTests/M3ReferenceStump/GLB/ReferenceStump/Materials/Material_0.Material_0"
+            ],
+            "deviation_cm": {
+              "max": 4.30584986752605,
+              "mean": 0.10222960460287984,
+              "rms": 0.15357616093708817
+            }
+          }
+        ],
+        "screen_sizes": [
+          1.0,
+          0.41999998688697815,
+          0.1899999976158142
+        ],
+        "nanite_enabled": false
+      },
+      "textures": {
+        "BaseColorTexture": {
+          "name": "Image_0",
+          "width": 1024,
+          "height": 1024,
+          "srgb": true
+        },
+        "MetallicRoughnessTexture": {
+          "name": "Image_1",
+          "width": 1024,
+          "height": 1024,
+          "srgb": false
+        }
+      },
+      "collision": {
+        "simple_shapes": 5,
+        "primitive_shapes": 0,
+        "convex_hulls": 5,
+        "hull_vertex_counts": [
+          18,
+          21,
+          24,
+          21,
+          14
+        ],
+        "complexity": "<CollisionTraceFlag.CTF_USE_SIMPLE_AND_COMPLEX: 1>",
+        "collision_lod": 0,
+        "requested": "auto",
+        "mode": "convex",
+        "status": "pass",
+        "warnings": [],
+        "probes": [
+          {
+            "name": "solid trunk",
+            "start_cm": [
+              0,
+              -150,
+              0
+            ],
+            "end_cm": [
+              0,
+              150,
+              0
+            ],
+            "blocked": true,
+            "line_blocked": true,
+            "capsule_blocked_observed": true,
+            "pass": true
+          },
+          {
+            "name": "above trunk",
+            "start_cm": [
+              0,
+              -150,
+              110
+            ],
+            "end_cm": [
+              0,
+              150,
+              110
+            ],
+            "blocked": false,
+            "line_blocked": false,
+            "capsule_blocked_observed": false,
+            "pass": true
+          },
+          {
+            "name": "pawn capsule at trunk",
+            "start_cm": [
+              0,
+              -170,
+              -7
+            ],
+            "end_cm": [
+              0,
+              170,
+              -7
+            ],
+            "blocked": true,
+            "radius_cm": 24,
+            "half_height_cm": 42,
+            "line_blocked": true,
+            "capsule_blocked_observed": true,
+            "pass": true
+          }
+        ],
+        "forced_lods": {
+          "0": "pass",
+          "1": "pass",
+          "2": "pass"
+        },
+        "world": "pie",
+        "level": "/Game/Developer/CurioMeshBUHTests/M3ReferenceStump/Preview_StaticMeshes"
+      }
+    }
+  },
+  "stump_aggressive": {
+    "source_triangles": 40000,
+    "preset": "aggressive",
+    "processing_seconds": 16.72,
+    "retopology_seconds": 12.0,
+    "before_repair": {
+      "triangulated_faces": 19354,
+      "surface_p95": 0.00223227279493585,
+      "surface_max": 0.008575868792831898,
+      "silhouette_miss_pct": 0.6906338694418165,
+      "bad": 3,
+      "folded_over": 3,
+      "bent": 0,
+      "open_edges": 20,
+      "non_manifold_edges": 0,
+      "components": 4,
+      "invalid_uv_corners": 0,
+      "collapsed_uv_faces": 1
+    },
+    "after_repair": {
+      "triangulated_faces": 19354,
+      "surface_p95": 0.00223227279493585,
+      "surface_max": 0.008575868792831898,
+      "silhouette_miss_pct": 0.6906338694418165,
+      "bad": 3,
+      "folded_over": 3,
+      "bent": 0,
+      "open_edges": 20,
+      "non_manifold_edges": 0,
+      "components": 4,
+      "invalid_uv_corners": 0,
+      "collapsed_uv_faces": 1
+    },
+    "export": {
+      "triangles": 19354,
+      "primitives": 1,
+      "primitives_with_uv": 1,
+      "primitives_with_material": 1,
+      "materials": 1,
+      "embedded_images": [
+        {
+          "mime_type": "image/png",
+          "sha256": "b986b4a4522681c458e915360401869370dda68f984ea720abd1cef59f6e51ca"
+        },
+        {
+          "mime_type": "image/png",
+          "sha256": "4145a4416ef7c9b68ee7dcf3f9d4664c23bf8584aa8eaf120ba272d2dce2f250"
+        }
+      ],
+      "warnings": []
+    },
+    "repair_verdict": {
+      "status": "review",
+      "human_review": true,
+      "warnings": [],
+      "residual_checks": [
+        "remaining_bad",
+        "remaining_collapsed_uv_faces"
+      ]
+    }
+  },
+  "chest_balanced": {
+    "source_triangles": 40000,
+    "preset": "balanced",
+    "processing_seconds": 17.13,
+    "retopology_seconds": 11.1,
+    "before_repair": {
+      "triangulated_faces": 7744,
+      "surface_p95": 0.0029110850766301166,
+      "surface_max": 0.0151259396225214,
+      "silhouette_miss_pct": 0.25145936237090255,
+      "bad": 3,
+      "folded_over": 2,
+      "bent": 0,
+      "open_edges": 48,
+      "non_manifold_edges": 0,
+      "components": 9,
+      "invalid_uv_corners": 0,
+      "collapsed_uv_faces": 7
+    },
+    "after_repair": {
+      "triangulated_faces": 7744,
+      "surface_p95": 0.002912513352930546,
+      "surface_max": 0.0151259396225214,
+      "silhouette_miss_pct": 0.25145936237090255,
+      "bad": 2,
+      "folded_over": 0,
+      "bent": 1,
+      "open_edges": 48,
+      "non_manifold_edges": 0,
+      "components": 9,
+      "invalid_uv_corners": 0,
+      "collapsed_uv_faces": 7
+    },
+    "export": {
+      "triangles": 7744,
+      "primitives": 1,
+      "primitives_with_uv": 1,
+      "primitives_with_material": 1,
+      "materials": 1,
+      "embedded_images": [
+        {
+          "mime_type": "image/png",
+          "sha256": "34bc69738e0d534bb993ebecccf2bf9c17165dd6645c19cc57a17e41076a413e"
+        },
+        {
+          "mime_type": "image/png",
+          "sha256": "f7482a542a21fd0ede3c07539e1b7b9d3ad78c2044fa70b9ff4ea1fcb7ec86de"
+        }
+      ],
+      "warnings": []
+    },
+    "repair_verdict": {
+      "status": "review",
+      "human_review": true,
+      "warnings": [
+        "bent_faces_increased"
+      ],
+      "residual_checks": [
+        "remaining_bad",
+        "remaining_collapsed_uv_faces"
+      ]
+    },
+    "unreal": {
+      "asset": "/Game/Developer/CurioMeshBUHTests/M3ReferenceChest/GLB/ReferenceChest/StaticMeshes/ReferenceChest.ReferenceChest",
+      "lods": {
+        "status": "pass",
+        "reasons": [],
+        "ratios": [
+          0.5,
+          0.25
+        ],
+        "lod0_source_identical": true,
+        "lod0_render_identical": true,
+        "levels": [
+          {
+            "triangles": 7744,
+            "render_uv_channels": 1,
+            "has_render_normals": true,
+            "uv_abs_area": 0.7027220786840189,
+            "uv_samples": 512,
+            "invalid_uv_samples": 0,
+            "collapsed_uv_samples": 4,
+            "vertices": 8893,
+            "source_triangles": 7744,
+            "material_slots": [
+              0
+            ],
+            "materials": [
+              "/Game/Developer/CurioMeshBUHTests/M3ReferenceChest/GLB/ReferenceChest/Materials/Material_0.Material_0"
+            ]
+          },
+          {
+            "triangles": 3872,
+            "render_uv_channels": 1,
+            "has_render_normals": true,
+            "uv_abs_area": 0.713310581893893,
+            "uv_samples": 512,
+            "invalid_uv_samples": 0,
+            "collapsed_uv_samples": 5,
+            "vertices": 5817,
+            "source_triangles": null,
+            "material_slots": [
+              0
+            ],
+            "materials": [
+              "/Game/Developer/CurioMeshBUHTests/M3ReferenceChest/GLB/ReferenceChest/Materials/Material_0.Material_0"
+            ],
+            "deviation_cm": {
+              "max": 1.9366323537094983,
+              "mean": 0.04094384771116676,
+              "rms": 0.09610335974267839
+            }
+          },
+          {
+            "triangles": 1936,
+            "render_uv_channels": 1,
+            "has_render_normals": true,
+            "uv_abs_area": 0.6150913564342773,
+            "uv_samples": 512,
+            "invalid_uv_samples": 0,
+            "collapsed_uv_samples": 1,
+            "vertices": 3332,
+            "source_triangles": null,
+            "material_slots": [
+              0
+            ],
+            "materials": [
+              "/Game/Developer/CurioMeshBUHTests/M3ReferenceChest/GLB/ReferenceChest/Materials/Material_0.Material_0"
+            ],
+            "deviation_cm": {
+              "max": 2.3987545341380905,
+              "mean": 0.17372701024097856,
+              "rms": 0.28017614270586
+            }
+          }
+        ],
+        "screen_sizes": [
+          1.0,
+          0.41999998688697815,
+          0.1899999976158142
+        ],
+        "nanite_enabled": false
+      },
+      "textures": {
+        "BaseColorTexture": {
+          "name": "Image_0",
+          "width": 1024,
+          "height": 1024,
+          "srgb": true
+        },
+        "MetallicRoughnessTexture": {
+          "name": "Image_1",
+          "width": 1024,
+          "height": 1024,
+          "srgb": false
+        }
+      },
+      "collision": {
+        "simple_shapes": 1,
+        "primitive_shapes": 0,
+        "convex_hulls": 1,
+        "hull_vertex_counts": [
+          24
+        ],
+        "complexity": "<CollisionTraceFlag.CTF_USE_SIMPLE_AND_COMPLEX: 1>",
+        "collision_lod": 0,
+        "requested": "auto",
+        "mode": "convex",
+        "status": "pass",
+        "warnings": [],
+        "probes": [
+          {
+            "name": "solid container",
+            "start_cm": [
+              0,
+              -150,
+              -20
+            ],
+            "end_cm": [
+              0,
+              150,
+              -20
+            ],
+            "blocked": true,
+            "line_blocked": true,
+            "capsule_blocked_observed": true,
+            "pass": true
+          },
+          {
+            "name": "above the lid",
+            "start_cm": [
+              0,
+              -150,
+              105
+            ],
+            "end_cm": [
+              0,
+              150,
+              105
+            ],
+            "blocked": false,
+            "line_blocked": false,
+            "capsule_blocked_observed": false,
+            "pass": true
+          },
+          {
+            "name": "pawn capsule at chest",
+            "start_cm": [
+              0,
+              -170,
+              -15
+            ],
+            "end_cm": [
+              0,
+              170,
+              -15
+            ],
+            "blocked": true,
+            "radius_cm": 24,
+            "half_height_cm": 42,
+            "line_blocked": true,
+            "capsule_blocked_observed": true,
+            "pass": true
+          }
+        ],
+        "forced_lods": {
+          "0": "pass",
+          "1": "pass",
+          "2": "pass"
+        },
+        "world": "pie",
+        "level": "/Game/Developer/CurioMeshBUHTests/M3ReferenceChest/Preview_StaticMeshes"
+      }
+    }
+  },
+  "chest_high_fidelity": {
+    "source_triangles": 40000,
+    "preset": "high_fidelity",
+    "processing_seconds": 19.5,
+    "retopology_seconds": 15.1,
+    "before_repair": {
+      "triangulated_faces": 24306,
+      "surface_p95": 0.0011352577887009819,
+      "surface_max": 0.007091212552040815,
+      "silhouette_miss_pct": 0.08991997122560921,
+      "bad": 1,
+      "folded_over": 0,
+      "bent": 0,
+      "open_edges": 48,
+      "non_manifold_edges": 0,
+      "components": 9,
+      "invalid_uv_corners": 0,
+      "collapsed_uv_faces": 1
+    },
+    "after_repair": {
+      "triangulated_faces": 24306,
+      "surface_p95": 0.0011352577887009819,
+      "surface_max": 0.007091212552040815,
+      "silhouette_miss_pct": 0.08991997122560921,
+      "bad": 0,
+      "folded_over": 0,
+      "bent": 0,
+      "open_edges": 48,
+      "non_manifold_edges": 0,
+      "components": 9,
+      "invalid_uv_corners": 0,
+      "collapsed_uv_faces": 1
+    },
+    "export": {
+      "triangles": 24306,
+      "primitives": 1,
+      "primitives_with_uv": 1,
+      "primitives_with_material": 1,
+      "materials": 1,
+      "embedded_images": [
+        {
+          "mime_type": "image/png",
+          "sha256": "34bc69738e0d534bb993ebecccf2bf9c17165dd6645c19cc57a17e41076a413e"
+        },
+        {
+          "mime_type": "image/png",
+          "sha256": "f7482a542a21fd0ede3c07539e1b7b9d3ad78c2044fa70b9ff4ea1fcb7ec86de"
+        }
+      ],
+      "warnings": []
+    },
+    "repair_verdict": {
+      "status": "review",
+      "human_review": true,
+      "warnings": [],
+      "residual_checks": [
+        "remaining_collapsed_uv_faces"
+      ]
+    },
+    "unreal": {
+      "asset": "/Game/Developer/CurioMeshBUHTests/M3ReferenceChestHigh/GLB/ReferenceChestHigh/StaticMeshes/ReferenceChestHigh.ReferenceChestHigh",
+      "lods": {
+        "status": "pass",
+        "reasons": [],
+        "ratios": [
+          0.5,
+          0.25
+        ],
+        "lod0_source_identical": true,
+        "lod0_render_identical": true,
+        "levels": [
+          {
+            "triangles": 24306,
+            "render_uv_channels": 1,
+            "has_render_normals": true,
+            "uv_abs_area": 0.6347550502468948,
+            "uv_samples": 512,
+            "invalid_uv_samples": 0,
+            "collapsed_uv_samples": 3,
+            "vertices": 23095,
+            "source_triangles": 24306,
+            "material_slots": [
+              0
+            ],
+            "materials": [
+              "/Game/Developer/CurioMeshBUHTests/M3ReferenceChestHigh/GLB/ReferenceChestHigh/Materials/Material_0.Material_0"
+            ]
+          },
+          {
+            "triangles": 12152,
+            "render_uv_channels": 1,
+            "has_render_normals": true,
+            "uv_abs_area": 0.6348686921992339,
+            "uv_samples": 512,
+            "invalid_uv_samples": 0,
+            "collapsed_uv_samples": 3,
+            "vertices": 15588,
+            "source_triangles": null,
+            "material_slots": [
+              0
+            ],
+            "materials": [
+              "/Game/Developer/CurioMeshBUHTests/M3ReferenceChestHigh/GLB/ReferenceChestHigh/Materials/Material_0.Material_0"
+            ],
+            "deviation_cm": {
+              "max": 0.5847440811235589,
+              "mean": 0.011527043410621898,
+              "rms": 0.032307531620118325
+            }
+          },
+          {
+            "triangles": 6076,
+            "render_uv_channels": 1,
+            "has_render_normals": true,
+            "uv_abs_area": 0.6368452817114303,
+            "uv_samples": 512,
+            "invalid_uv_samples": 0,
+            "collapsed_uv_samples": 2,
+            "vertices": 9441,
+            "source_triangles": null,
+            "material_slots": [
+              0
+            ],
+            "materials": [
+              "/Game/Developer/CurioMeshBUHTests/M3ReferenceChestHigh/GLB/ReferenceChestHigh/Materials/Material_0.Material_0"
+            ],
+            "deviation_cm": {
+              "max": 1.963681578472239,
+              "mean": 0.05907976143946947,
+              "rms": 0.10390814680930775
+            }
+          }
+        ],
+        "screen_sizes": [
+          1.0,
+          0.41999998688697815,
+          0.1899999976158142
+        ],
+        "nanite_enabled": false
+      },
+      "textures": {
+        "BaseColorTexture": {
+          "name": "Image_0",
+          "width": 1024,
+          "height": 1024,
+          "srgb": true
+        },
+        "MetallicRoughnessTexture": {
+          "name": "Image_1",
+          "width": 1024,
+          "height": 1024,
+          "srgb": false
+        }
+      },
+      "collision": {
+        "simple_shapes": 1,
+        "primitive_shapes": 0,
+        "convex_hulls": 1,
+        "hull_vertex_counts": [
+          24
+        ],
+        "complexity": "<CollisionTraceFlag.CTF_USE_SIMPLE_AND_COMPLEX: 1>",
+        "collision_lod": 0,
+        "requested": "auto",
+        "mode": "convex",
+        "status": "pass",
+        "warnings": [],
+        "probes": [
+          {
+            "name": "solid container",
+            "start_cm": [
+              0,
+              -150,
+              -20
+            ],
+            "end_cm": [
+              0,
+              150,
+              -20
+            ],
+            "blocked": true,
+            "line_blocked": true,
+            "capsule_blocked_observed": true,
+            "pass": true
+          },
+          {
+            "name": "above the lid",
+            "start_cm": [
+              0,
+              -150,
+              105
+            ],
+            "end_cm": [
+              0,
+              150,
+              105
+            ],
+            "blocked": false,
+            "line_blocked": false,
+            "capsule_blocked_observed": false,
+            "pass": true
+          },
+          {
+            "name": "pawn capsule at chest",
+            "start_cm": [
+              0,
+              -170,
+              -15
+            ],
+            "end_cm": [
+              0,
+              170,
+              -15
+            ],
+            "blocked": true,
+            "radius_cm": 24,
+            "half_height_cm": 42,
+            "line_blocked": true,
+            "capsule_blocked_observed": true,
+            "pass": true
+          }
+        ],
+        "forced_lods": {
+          "0": "pass",
+          "1": "pass",
+          "2": "pass"
+        },
+        "world": "pie",
+        "level": "/Game/Developer/CurioMeshBUHTests/M3ReferenceChestHigh/Preview_StaticMeshes"
+      }
+    }
+  },
+  "validation_regressions": {
+    "unsafe_lod_candidate": {
+      "status": "fail",
+      "reasons": [
+        "triangle_counts_not_descending"
+      ],
+      "ratios": [
+        0.004000000189989805,
+        0.0010000000474974513
+      ],
+      "lod0_source_identical": true,
+      "lod0_render_identical": true,
+      "levels": [
+        {
+          "triangles": 7744,
+          "render_uv_channels": 1,
+          "has_render_normals": true,
+          "uv_abs_area": 0.7027220786840189,
+          "uv_samples": 512,
+          "invalid_uv_samples": 0,
+          "collapsed_uv_samples": 4,
+          "vertices": 8893,
+          "source_triangles": 7744,
+          "material_slots": [
+            0
+          ],
+          "materials": [
+            "/Game/Developer/CurioMeshBUHTests/M3RatioRollback/GLB/ReferenceChest/Materials/Material_0.Material_0"
+          ]
+        },
+        {
+          "triangles": 64,
+          "render_uv_channels": 1,
+          "has_render_normals": true,
+          "uv_abs_area": 0.5637976283906028,
+          "uv_samples": 64,
+          "invalid_uv_samples": 0,
+          "collapsed_uv_samples": 0,
+          "vertices": 139,
+          "source_triangles": null,
+          "material_slots": [
+            0
+          ],
+          "materials": [
+            "/Game/Developer/CurioMeshBUHTests/M3RatioRollback/GLB/ReferenceChest/Materials/Material_0.Material_0"
+          ],
+          "deviation_cm": {
+            "max": 9.834507327548339,
+            "mean": 2.2368027486651405,
+            "rms": 3.017885535250933
+          }
+        },
+        {
+          "triangles": 64,
+          "render_uv_channels": 1,
+          "has_render_normals": true,
+          "uv_abs_area": 0.5637976283906028,
+          "uv_samples": 64,
+          "invalid_uv_samples": 0,
+          "collapsed_uv_samples": 0,
+          "vertices": 139,
+          "source_triangles": null,
+          "material_slots": [
+            0
+          ],
+          "materials": [
+            "/Game/Developer/CurioMeshBUHTests/M3RatioRollback/GLB/ReferenceChest/Materials/Material_0.Material_0"
+          ],
+          "deviation_cm": {
+            "max": 9.834507327548339,
+            "mean": 2.2368027486651405,
+            "rms": 3.017885535250933
+          }
+        }
+      ],
+      "screen_sizes": [
+        1.0,
+        0.41999998688697815,
+        0.1899999976158142
+      ],
+      "nanite_enabled": false,
+      "rollback_succeeded": true
+    },
+    "lod0_after_reopening": [
+      {
+        "triangles": 7744,
+        "vertices": 8893,
+        "uv_channels": 1
+      }
+    ],
+    "no_collision_in_pie": {
+      "status": "pass",
+      "probes": [
+        {
+          "name": "solid container",
+          "start_cm": [
+            0,
+            -150,
+            -20
+          ],
+          "end_cm": [
+            0,
+            150,
+            -20
+          ],
+          "blocked": false,
+          "line_blocked": false,
+          "capsule_blocked_observed": false,
+          "pass": true
+        },
+        {
+          "name": "above the lid",
+          "start_cm": [
+            0,
+            -150,
+            105
+          ],
+          "end_cm": [
+            0,
+            150,
+            105
+          ],
+          "blocked": false,
+          "line_blocked": false,
+          "capsule_blocked_observed": false,
+          "pass": true
+        },
+        {
+          "name": "pawn capsule at chest",
+          "start_cm": [
+            0,
+            -170,
+            -15
+          ],
+          "end_cm": [
+            0,
+            170,
+            -15
+          ],
+          "blocked": false,
+          "radius_cm": 24,
+          "half_height_cm": 42,
+          "line_blocked": false,
+          "capsule_blocked_observed": false,
+          "pass": true
+        }
+      ],
+      "forced_lods": {},
+      "world": "pie",
+      "level": "/Game/Developer/CurioMeshBUHTests/M3ModeNone/Preview_StaticMeshes"
+    },
+    "no_collision_settings": {
+      "simple_shapes": 0,
+      "primitive_shapes": 0,
+      "convex_hulls": 0,
+      "hull_vertex_counts": [],
+      "complexity": "<CollisionTraceFlag.CTF_USE_SIMPLE_AND_COMPLEX: 1>",
+      "collision_lod": 0,
+      "requested": "auto",
+      "mode": "none",
+      "status": "untested",
+      "warnings": []
+    },
+    "simple_box_editor_probes": {
+      "status": "pass",
+      "probes": [
+        {
+          "name": "solid container",
+          "start_cm": [
+            0,
+            -150,
+            -20
+          ],
+          "end_cm": [
+            0,
+            150,
+            -20
+          ],
+          "blocked": true,
+          "line_blocked": true,
+          "capsule_blocked_observed": true,
+          "pass": true
+        },
+        {
+          "name": "above the lid",
+          "start_cm": [
+            0,
+            -150,
+            105
+          ],
+          "end_cm": [
+            0,
+            150,
+            105
+          ],
+          "blocked": false,
+          "line_blocked": false,
+          "capsule_blocked_observed": false,
+          "pass": true
+        },
+        {
+          "name": "pawn capsule at chest",
+          "start_cm": [
+            0,
+            -170,
+            -15
+          ],
+          "end_cm": [
+            0,
+            170,
+            -15
+          ],
+          "blocked": true,
+          "radius_cm": 24,
+          "half_height_cm": 42,
+          "line_blocked": true,
+          "capsule_blocked_observed": true,
+          "pass": true
+        }
+      ],
+      "forced_lods": {},
+      "world": "editor",
+      "level": "/Game/Developer/CurioMeshBUHTests/M3ModeSimple/Preview_StaticMeshes"
+    },
+    "simple_box_settings": {
+      "simple_shapes": 1,
+      "primitive_shapes": 1,
+      "convex_hulls": 0,
+      "hull_vertex_counts": [],
+      "complexity": "<CollisionTraceFlag.CTF_USE_SIMPLE_AND_COMPLEX: 1>",
+      "collision_lod": 0,
+      "requested": "simple",
+      "mode": "simple",
+      "status": "untested",
+      "warnings": []
+    },
+    "failed_convex_generation": {
+      "simple_shapes": 0,
+      "primitive_shapes": 0,
+      "convex_hulls": 0,
+      "hull_vertex_counts": [],
+      "complexity": "<CollisionTraceFlag.CTF_USE_SIMPLE_AND_COMPLEX: 1>",
+      "collision_lod": 0,
+      "requested": "convex",
+      "mode": "convex",
+      "status": "fail",
+      "warnings": [
+        "collision_geometry_generation_failed"
+      ]
+    },
+    "cli_pie": {
+      "status": "pass",
+      "processing_seconds": 24.05,
+      "disposition": "REVIEW",
+      "reasons": [
+        "lod_visual_validation_pending"
+      ]
+    },
+    "unavailable_engine": {
+      "status": "unavailable",
+      "disposition": "REVIEW",
+      "reasons": [
+        "collision_queries_untested",
+        "unreal_unavailable"
+      ]
+    },
+    "duplicate_run_rejected": true,
+    "no_staged_files_after_failed_blender_job": true
+  },
+  "test_suite": {
+    "total": 837,
+    "skipped": 108,
+    "blender_repair_regression": "pass"
+  }
+}

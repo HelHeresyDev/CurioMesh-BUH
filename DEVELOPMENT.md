@@ -2,7 +2,45 @@
 
 The `buh/blender-5.3` branch starts at upstream tag `v0.9.9`, commit `bf0d12ef901238853350f8de2ed425f0f6f2fedd`. Use `origin` for your fork and `upstream` for `https://github.com/CurioCrafter/CurioMesh.git`. Fetch releases with `git fetch upstream --tags`. Inspect the diff from the tag pinned by this branch, test the next upstream release on a new branch, then merge verified updates into the development branch.
 
-The five agent skills are in `skills/`. Use the fork's `curiomesh-retopo` scripts and the updated `curiomesh-fix-bad-faces` instructions together. The `curiomesh-agent`, `curiomesh-batch-and-lods`, and `curiomesh-blender-mcp` skills retain their upstream interfaces. They can use the fork in an isolated Blender process. Keep the normal profile and its globally installed OpenCode skills available for stock runs.
+## Static props from Blender to Unreal
+
+Run the CLI with system Python and the Blender 5.3 development add-on. For Unreal processing, start the 5.8.4 project editor with `-ModelContextProtocolStartServer`, `-EnablePlugins=PythonScriptPlugin,GeometryScripting`, and `-ExecutePythonScript=<fork>/scripts/unreal/curiomesh_validation_toolset.py`. Set `CURIOMESH_VALIDATION_EXPORTS` in the editor and CLI environment to the same absolute export directory. The toolset keeps imports and preview levels under `/Game/Developer/CurioMeshBUHTests/`. Use a new run ID and fresh output paths for each run. Set `MCP_URL` when the editor uses a nondefault MCP port.
+
+```sh
+python3 skills/curiomesh-retopo/scripts/curiomesh_process.py "$lantern_source" \
+  --addon "$development_addon" --blender "$blender_bin" \
+  --out "$CURIOMESH_VALIDATION_EXPORTS/LanternM3.glb" --report "$report_dir/LanternM3.json" \
+  --preset balanced --asset-category architecture --lods --lod-ratios 0.5,0.25 \
+  --collision complex --collision-probes tests/fixtures/lantern_collision_probes.json \
+  --unreal-mcp-helper "$project/tmp_opencode/mcp_do.py" --unreal-run-id LanternM3 --unreal-pie
+```
+
+Use `--asset-category organic` with `reference_stump_collision_probes.json` for the painted stump, or `--asset-category hard_surface` with `reference_chest_collision_probes.json` for the wooden chest. Both can use `--collision auto`. Coordinates are offsets from the placed mesh pivot in Unreal centimeters. A probe specifies `name`, `start_cm`, `end_cm`, and `blocked`. Optional `capsule_blocked`, `radius_cm`, and `half_height_cm` override the capsule prediction and its default 3 cm radius and 5 cm half height. Use a headless editor with `-nullrhi` for imports and collision tests. Use a fresh graphical XWayland editor and the project's VRAM handoff for rendered PIE captures.
+
+`--preset auto` uses Balanced and asks for review if the category is unspecified. `--collision auto` requests up to 16 convex hulls for architecture, five for organic geometry, and eight for hard-surface or unspecified assets. Decorative objects get `none`. `simple` fits a single box. Use explicit `complex` for stationary concave props whose required openings fail a convex probe. Triangle collision uses LOD0 even while the renderer switches levels. The cost of that choice should be evaluated before scattering a large number of such props.
+
+Omit the Unreal options for a Blender-only run. It reports Unreal as `untested`. If the requested toolset or server is unavailable, the report identifies the unavailable validation and retains the accepted GLB as `REVIEW`. An import, texture, LOD gate, or collision failure reports `FAIL`. The LOD checks compare rendered geometry and UVs and require manual review of the captured material and silhouette. [Milestone 3 results](TEST_RESULTS.md#milestone-3-static-asset-validation)
+
+### Reproduce the graphical LOD test
+
+Load the lantern preview reported by the CLI and start graphical PIE. Discover the registered `CurioMeshValidation` name using the helper's `list_toolsets` call. Invoke `capture_preview_at_distance` at `0.9`, `1.9`, and `4.2` distance scales and include automatic LOD `-1` and forced LODs `0`, `1`, and `2` at each scale. The helper expects a JSON arguments file. With `toolset` set to the discovered name and `run_id` set to the preview's ID, run the following from the fork checkout.
+
+```sh
+args_file="$(mktemp)"
+for distance in 0.9 1.9 4.2; do
+  for lod in -1 0 1 2; do
+    jq -n --arg run_id "$run_id" --argjson forced_lod "$lod" --argjson distance_scale "$distance" \
+      '{run_id:$run_id,forced_lod:$forced_lod,distance_scale:$distance_scale}' > "$args_file"
+    python3 "$project/tmp_opencode/mcp_do.py" "$toolset" capture_preview_at_distance "$args_file"
+  done
+done
+python3 scripts/unreal/compare_lod_captures.py "$CURIOMESH_VALIDATION_EXPORTS/preview_renders" \
+  "$run_id-Preview_StaticMeshes" 0.9 1.9 4.2 > "$report_dir/lantern-distance.json"
+```
+
+The capture comparator requires Pillow. Stop PIE after the captures. The preview needs the toolset version that places a capture actor in the saved map. For an asset without Download fixtures, `scripts/unreal/create_static_fixtures.py` can create small textured chest and rock GLBs in Blender. `scripts/unreal/render_blender_reference.py` renders front, side, and three-quarter Blender comparisons using Cycles on the CPU.
+
+The five agent skills are in `skills/`. Use the fork's `curiomesh-retopo` scripts and the updated `curiomesh-fix-bad-faces` instructions together. The `curiomesh-batch-and-lods` skill documents both the BUH single-mesh path and separate Blender LOD exports. The `curiomesh-agent` and `curiomesh-blender-mcp` skills retain their upstream interfaces. They can use the fork in an isolated Blender process. Keep the normal profile and its globally installed OpenCode skills available for stock runs.
 
 ## Build and test on Linux x86-64
 

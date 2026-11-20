@@ -27,6 +27,8 @@ CurioMesh's own `Batch Remesh Selected` button belongs to the older whole-mesh r
 
 ## LOD sets
 
+For a BUH static prop in Unreal 5.8.4, use `curiomesh_process.py --lods --lod-ratios 0.5,0.25` with the project's Unreal options. This builds one textured Static Mesh from the accepted base GLB and verifies that LOD0 stays intact. The Blender command below exports separate meshes. [BUH Unreal setup and validation](https://github.com/HelHeresyDev/CurioMesh-BUH/blob/buh/blender-5.3/DEVELOPMENT.md#static-props-from-blender-to-unreal)
+
 ```
 "$BLENDER" -b --factory-startup --python <retopo skill>/scripts/curiomesh_run.py -- model.obj --use GAME --lods 50,25,12.5 --out out/model.glb --report out/lods.json
 ```

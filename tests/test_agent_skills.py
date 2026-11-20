@@ -56,6 +56,40 @@ def fake_blender(folder, stop, seen):
 
 
 class AgentSkillsTest(unittest.TestCase):
+    def test_static_asset_disposition(self):
+        import copy
+
+        report = {"ok": True, "export": {"warnings": []}, "unreal": {"status": "pass", "warnings": []},
+                  "repair": {"quality_verdict": {"human_review": False}},
+                  "lods": {"requested": True, "status": "pass", "visual_status": "pass"},
+                  "collision": {"requested": "auto", "mode": "convex", "status": "pass", "world": "pie"}}
+        self.assertEqual(process.disposition(report), ("PASS", []))
+        for stage, changes, decision, reason in (
+            ("unreal", {"status": "untested"}, "REVIEW", "unreal_untested"),
+            ("unreal", {"status": "unavailable"}, "REVIEW", "unreal_unavailable"),
+            ("unreal", {"status": "fail", "warnings": ["unreal_missing_BaseColorTexture"]}, "FAIL", "unreal_missing_BaseColorTexture"),
+            ("unreal", {"status": "pass", "warnings": ["unreal_uv_layer_missing"]}, "REVIEW", "unreal_uv_layer_missing"),
+            ("lods", {"visual_status": "untested"}, "REVIEW", "lod_visual_validation_pending"),
+            ("lods", {"status": "fail"}, "FAIL", "lods_validation_failed"),
+            ("collision", {"status": "fail"}, "FAIL", "collision_validation_failed"),
+            ("collision", {"world": "editor"}, "REVIEW", "collision_pie_untested"),
+        ):
+            with self.subTest(stage=stage, changes=changes):
+                case = copy.deepcopy(report)
+                case[stage].update(changes)
+                self.assertEqual(process.disposition(case), (decision, [reason]))
+        report["collision"] = {"requested": "auto", "mode": "none", "status": "untested"}
+        self.assertEqual(process.disposition(report), ("PASS", []))
+        self.assertEqual(process.disposition({"ok": False, "error": "import failed"}), ("FAIL", ["import failed"]))
+
+    def test_lod_ratio_validation(self):
+        from argparse import ArgumentTypeError
+
+        self.assertEqual(process.parse_ratios("0.5,0.25"), [0.5, 0.25])
+        for invalid in (".25,.5", "1,0.2", "0.5,0", "0.5,0.5", "0.5", "nan,.3", "0.8,.5,.25"):
+            with self.subTest(ratios=invalid), self.assertRaises(ArgumentTypeError):
+                process.parse_ratios(invalid)
+
     def test_report_helpers(self):
         self.assertEqual(cm.parse_use("low-poly"), "LOW_POLY")
         self.assertEqual(cm.parse_reduce("25%"), ("PERCENT", 25.0))
@@ -117,10 +151,44 @@ class AgentSkillsTest(unittest.TestCase):
 
             write()
             self.assertEqual(process.glb_summary(path)["triangles"], 1)
+            primitive = document["meshes"][0]["primitives"][0]
+            document["materials"] = [{"pbrMetallicRoughness": {"baseColorTexture": {"index": 0}}}]
+            document["textures"] = [{"source": 0}]
+            primitive["material"] = 0
+            write()
+            with self.assertRaisesRegex(ValueError, "texture or UV assignment"):
+                process.glb_summary(path)
+            primitive["attributes"]["TEXCOORD_0"] = 0
+            write()
+            self.assertEqual(process.glb_summary(path)["pbr_texture_roles"], ["baseColorTexture"])
+            primitive["material"] = 1
+            write()
+            with self.assertRaisesRegex(ValueError, "missing material"):
+                process.glb_summary(path)
+            primitive["material"] = 0
             document["bufferViews"][1]["byteLength"] = 8
             write()
             with self.assertRaisesRegex(ValueError, "buffer view"):
                 process.glb_summary(path)
+
+    def test_unreal_unavailable_and_import_failure(self):
+        with tempfile.TemporaryDirectory() as scratch:
+            root = Path(scratch)
+            helper, mesh = root / "helper.py", root / "asset.glb"
+            mesh.write_bytes(b"accepted asset")
+            helper.write_text("raise SystemExit(1)\n")
+            with self.assertRaises(process.UnrealUnavailable):
+                process.unreal_import(helper, mesh, "Unavailable")
+            helper.write_text("""import json, sys
+if sys.argv[2] == 'list_toolsets':
+    text = '- project.scripts.unreal.CurioMeshValidation: Test toolset'
+else:
+    text = 'The import produced no static mesh'
+print(json.dumps({'result': {'content': [{'text': text}], 'isError': sys.argv[2] != 'list_toolsets'}}))
+""")
+            with self.assertRaisesRegex(RuntimeError, "no static mesh"):
+                process.unreal_import(helper, mesh, "FailedImport")
+            self.assertEqual(mesh.read_bytes(), b"accepted asset")
 
     def test_blender_mcp_skill_uses_agentcmd(self):
         text = (ROOT / "skills" / "curiomesh-blender-mcp" / "SKILL.md").read_text(encoding="utf-8")

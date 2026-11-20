@@ -1,0 +1,4 @@
+[
+  {"name": "solid rock", "start_cm": [0, -160, 0], "end_cm": [0, 160, 0], "blocked": true},
+  {"name": "above rock", "start_cm": [0, -160, 95], "end_cm": [0, 160, 95], "blocked": false}
+]
